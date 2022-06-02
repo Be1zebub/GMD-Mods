@@ -17,7 +17,7 @@ hook.Add("IGS.PlayerPurchasedItem", "gm-donate.ru/bonus-on-1st-purchase", functi
 
 	cache[sid] = true
 
-	fname = "igs/bonus-on-1st-purchase/"
+	fname = "igs/bonus-on-1st-purchase/".. sid ..".txt"
 	if file.Exists(fname, "DATA") then return end
 
 	file.Write(fname, os.time())
