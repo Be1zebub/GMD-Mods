@@ -1,5 +1,5 @@
 -- from incredible-gmod.ru with <3
--- https://github.com/Be1zebub/GMD-Mods/blob/master/modern_car_dealer.lua
+-- https://github.com/Be1zebub/GMD-Mods/blob/master/mods/modern_car_dealer.lua
 -- источник: https://forum.gm-donate.ru/t/donat-mashiny/1232
 -- аддон: https://www.gmodstore.com/market/view/modern-car-dealer-showcases-mechanic-underglow-easily-configurable
 
