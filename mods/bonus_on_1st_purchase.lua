@@ -13,8 +13,8 @@ local cache, sid, fname = {}
 
 hook.Add("IGS.PlayerPurchasedItem", "gm-donate.ru/bonus-on-1st-purchase", function(ply)
 	sid = ply:SteamID64()
-	if cache[sid] then return end
 
+	if cache[sid] then return end
 	cache[sid] = true
 
 	fname = "igs/bonus-on-1st-purchase/".. sid ..".txt"
