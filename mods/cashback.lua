@@ -1,0 +1,53 @@
+-- from incredible-gmod.ru with <3
+-- https://github.com/Be1zebub/GMD-Mods/blob/master/mods/cashback.lua
+-- источник: https://forum.gm-donate.ru/t/keshbek/963
+-- спасибо @amd_nick за вклад
+
+-- мгновенный кэш-бэк выдаётся сразу после покупки
+-- не мгновенный копиться и выдаётся в начале следующего месяца
+
+local ITEM = FindMetaTable("IGSItem")
+
+function ITEM:SetCashback(percent, instant) -- процент 0.2 = 20%, 0.5 = 50%, мгновенный или в следующем месяце?
+	self:SetMeta("cashback", percent)
+	self:SetMeta("cashback_instant", tobool(instant))
+	return self
+end
+
+hook.Add("IGS.PlayerPurchasedItem", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/cashback.lua", function(ply, item)
+	local perc = item:GetMeta("cashback")
+	if (perc or 0) <= 0 then return end
+
+	if item:GetMeta("cashback_instant") then
+		local cutoff = math.floor(item.price * perc)
+		ply:AddIGSFunds(cutoff, "Cashback ".. cutoff .." - ".. (perc * 100) .."%")
+
+		IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
+	else
+		local summ = math.floor(ITEM.price * perc)
+		local total = bib.incr(pl, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
+
+		IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
+	end
+end)
+
+hook.Add("IGS.PlayerPurchasesLoaded", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/cashback.lua", function(ply)
+	local uid = "igs_cashback_".. (tonumber(os.date("%m")) - 1) .."_".. ply:SteamID64()
+	local cashback = bib.getNum(ply, uid)
+	if not cashback then return end
+
+	bib.delete(uid)
+	ply:AddIGSFunds(cashback, "Monthly Cashback")
+	IGS.Notify(ply, "Вы получили ".. PL_MONEY(cashback) .." кэшбэка за вашу поддержку в прошлом месяце, наслаждайтесь!")
+end)
+
+-- пример создания предмета с кэшбэком
+
+IGS("VIP на месяц", "vip_na_mesyac")
+:SetULXGroup("vip")
+:SetPrice(150)
+:SetTerm(30) -- 30 дней
+:SetCategory("Группы")
+:SetDescription("С этой покупкой вы станете офигенными, потому что в ней воооот такая куча крутых возможностей")
+:SetCashback(0.3) -- 30%, накопленная сумма кэшбэка выдасться в следующем месяце
+--:SetCashback(0.25, true) -- 25%, мгновенный кэшбэк
