@@ -6,6 +6,7 @@
 IGS("Доступ к Wire-mod", "igs_wiremod")
 :SetPrice(160)
 :SetTerm(30)
+:SetNetworked(true)
 
 hook.Add("CanTool", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/wire-mod.lua", function(ply, _, toolname) -- запрещает использование инструмента
 	if toolname:StartWith("wire_") and not ply:HasPurchase("igs_wiremod") then
