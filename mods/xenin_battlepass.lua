@@ -42,7 +42,8 @@ end
 
 function REWARD:Unlock(ply, reward)
 	if CLIENT then return end
-	IGS.PlayerActivateItem(ply, reward)
+	IGS.AddToInventory(ply, reward) -- добавляет предмет в инвентарь igs
+	-- IGS.PlayerActivateItem(ply, reward) -- сразу активирует предмет
 end
 
 REWARD:Register("igs-item")
