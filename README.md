@@ -5,7 +5,7 @@
 
 ### Установка
 Просто распакуйте папку `garrysmod` в корень вашего сервера.  
-Если вы хотите установить несколько модов а не все сразу, удалите лишние моды из `garrysmod/addons/igs-modification/lua/mods`  
+Если вы хотите установить несколько модов а не все сразу, удалите лишние моды из `garrysmod/addons/igs-modification/lua/igs/mods`  
 
 ### Вклад и поддержка
 Нужна помощь? https://forum.gm-donate.net/t/klondajk-mody-mnogo-modov/1235  
