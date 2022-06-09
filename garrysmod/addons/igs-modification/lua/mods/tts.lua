@@ -1,5 +1,5 @@
 -- from incredible-gmod.ru with <3
--- https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua
+-- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua
 
 local voice = "alyss" -- список голосов: https://cloud.yandex.ru/docs/speechkit/tts/voices
 local maxDist = 1024 -- макс дистацния на которой будет слышно говорилку
@@ -18,22 +18,22 @@ if SERVER then
 		end
 	end
 
-	util.AddNetworkString("https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua")
+	util.AddNetworkString("https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua")
 
 	local function tts(ply, text)
 		if ply:Alive() and ply:HasPurchase("tts") then
-			net.Start("https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua")
+			net.Start("https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua")
 				net_WritePlayer(ply)
 				net.WriteString(text)
 			net.Broadcast()
 		end
 	end
 
-	hook.Add("PostGamemodeLoaded", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua", function()
+	hook.Add("PostGamemodeLoaded", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua", function()
 		if DarkRP then
-			hook.Add("PostPlayerSay", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua", tts)
+			hook.Add("PostPlayerSay", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua", tts)
 		else
-			hook.Add("PlayerSay", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua", tts)
+			hook.Add("PlayerSay", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua", tts)
 		end
 	end)
 else
@@ -54,7 +54,7 @@ else
 
 	local stations = {}
 
-	net.Receive("https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua", function()
+	net.Receive("https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua", function()
 		local ply  = net_ReadPlayer()
 		if LocalPlayer():GetPos():Distance(ply:GetPos()) > maxDist then return end
 
@@ -74,7 +74,7 @@ else
 	end)
 
 	local station
-	hook.Add("Think", "https://github.com/Be1zebub/GMD-Mods/blob/master/mods/tts.lua", function()
+	hook.Add("Think", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/tts.lua", function()
 		for i = #stations, 1, -1 do
 			station = stations[i]
 

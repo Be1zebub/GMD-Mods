@@ -1,5 +1,5 @@
 -- from incredible-gmod.ru with <3
--- https://github.com/Be1zebub/GMD-Mods/blob/master/mods/unjail.lua
+-- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/unjail.lua
 -- источник: https://forum.gm-donate.ru/t/item-dlya-platnogo-unjail-vyjti-iz-dzhajla/899/2
 
 IGS("Побег из jail", "unjail")
@@ -11,5 +11,5 @@ IGS("Побег из jail", "unjail")
     end
 end)
 :SetOnActivate(function(ply)
-    RunConsoleCommand("ulx", "jail", ply:SteamID(), "1", "true")
+    RunConsoleCommand("ulx", "jail", ply:SteamID(), "1", "true") -- если у вас ulx, для других админок нужно немного поменять команду
 end)

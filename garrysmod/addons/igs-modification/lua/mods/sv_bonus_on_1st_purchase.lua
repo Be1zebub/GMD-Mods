@@ -1,8 +1,16 @@
 -- from incredible-gmod.ru with <3
--- https://github.com/Be1zebub/GMD-Mods/blob/master/mods/bonus_on_1st_purchase.lua
+-- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/sv_bonus_on_1st_purchase.lua
 -- источник: https://forum.gm-donate.ru/t/vydacha-privilegii-za-pokupku-lyubogo-tovara/961/2
 
-local item_uid = "vip4all"
+local item_uid = "vip4all" -- уникальный интендификатор предмета
+--[[ Пример:
+IGS("Разноцветный физган", "rainbowphysgun")
+:SetPrice(150)
+:SetTerm(30)
+:SetNetworked(true)
+
+здесь uid будет rainbowphysgun
+]]--
 local activate = false -- активировать сразу после выдачи? либо просто выдать в инвентарь?
 local notify = "Поздравляю с первой покупкой! В качестве награды за поддержку сервера мы дарим вам бесплатную VIP привелегию, пользуйтесь на здоровье."
 
@@ -11,7 +19,7 @@ local notify = "Поздравляю с первой покупкой! В кач
 file.CreateDir("igs")
 local cache, sid, fname = {}
 
-hook.Add("IGS.PlayerPurchasedItem", "gm-donate.ru/bonus-on-1st-purchase", function(ply)
+hook.Add("IGS.PlayerPurchasedItem", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/sv_bonus_on_1st_purchase.lua", function(ply)
 	sid = ply:SteamID64()
 
 	if cache[sid] then return end
