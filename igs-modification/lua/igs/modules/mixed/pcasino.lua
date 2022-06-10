@@ -1,5 +1,5 @@
--- from incredible-gmod.ru with <3
--- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/pcasino.lua
+-- Интеграция с Perfect Casino (pcasino)
+
 -- источник: https://forum.gm-donate.net/t/pcasino-igs-xenin-battlepass/1313
 -- аддон: https://www.gmodstore.com/market/view/pcasino-the-perfect-casino-addon-roulette-blackjack-slots-prize-wheel
 -- автор: https://github.com/BazZziliuS
