@@ -19,11 +19,13 @@ function ITEM:SetPlayerModel(path, ...)
 end
 
 if SERVER then
+	local item
 	hook.Add("PlayerLoadout", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/donate_models.lua", function(ply)
 		timer.Simple(3, function()
 			if IsValid(ply) == false then return end
 
-			for _, item in pairs(IGS.PlayerPurchases(ply)) do
+			for uid in pairs(IGS.PlayerPurchases(ply)) do
+				item = IGS.GetItem(uid)
 				if item.PlayerModel == nil then continue end
 
 				if item.ModelTeamWhitelist == nil or item.ModelTeamWhitelist[ply:Team()] then
