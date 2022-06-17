@@ -14,19 +14,39 @@ function ITEM:SetCashback(percent, instant) -- процент 0.2 = 20%, 0.5 = 5
 	return self
 end
 
+local global, global_instant
+
+function IGS.SetGlobalCashback(enable, percent, instant)
+	if enable then
+		global, global_instant = percent, tobool(instant)
+	else
+		global, global_instant = nil, nil
+	end
+end
+
 if SERVER then
 	hook.Add("IGS.PlayerPurchasedItem", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/cashback.lua", function(ply, item)
 		local perc = item:GetMeta("cashback")
-		if (perc or 0) <= 0 then return end
+		if (perc or 0) <= 0 and global == nil then return end
 
 		if item:GetMeta("cashback_instant") then
 			local cutoff = math.floor(item.price * perc)
 			ply:AddIGSFunds(cutoff, "Cashback ".. cutoff .." - ".. (perc * 100) .."%")
 
 			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
+		elseif global_instant then
+			local cutoff = math.floor(item.price * global)
+			ply:AddIGSFunds(cutoff, "Cashback ".. cutoff .." - ".. (global * 100) .."%")
+
+			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
+		elseif global then
+			local summ = math.floor(ITEM.price * global)
+			local total = bib.incr(ply, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
+
+			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		else
 			local summ = math.floor(ITEM.price * perc)
-			local total = bib.incr(pl, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
+			local total = bib.incr(ply, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		end
@@ -53,3 +73,6 @@ IGS("VIP на месяц", "vip_na_mesyac")
 :SetDescription("С этой покупкой вы станете офигенными, потому что в ней воооот такая куча крутых возможностей")
 :SetCashback(0.3) -- 30%, накопленная сумма кэшбэка выдасться в следующем месяце
 --:SetCashback(0.25, true) -- 25%, мгновенный кэшбэк
+
+-- пример включения глобального кэшбэка
+IGS.SetGlobalCashback(true, 0.15, false) -- включить, 15%, не мгновенный
