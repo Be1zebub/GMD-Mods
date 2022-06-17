@@ -20,20 +20,16 @@ end
 
 if SERVER then
 	local item
-	hook.Add("PlayerLoadout", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/donate_models.lua", function(ply)
-		timer.Simple(3, function()
-			if IsValid(ply) == false then return end
+	hook.Add("PlayerSetModel", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/donate_models.lua", function(ply)
+		for uid in pairs(IGS.PlayerPurchases(ply)) do
+			item = IGS.GetItem(uid)
+			if item.PlayerModel == nil then continue end
 
-			for uid in pairs(IGS.PlayerPurchases(ply)) do
-				item = IGS.GetItem(uid)
-				if item.PlayerModel == nil then continue end
-
-				if item.ModelTeamWhitelist == nil or item.ModelTeamWhitelist[ply:Team()] then
-					ply:SetModel(item.PlayerModel)
-					break
-				end
+			if item.ModelTeamWhitelist == nil or item.ModelTeamWhitelist[ply:Team()] then
+				ply:SetModel(item.PlayerModel)
+				return true -- блокируем GM: хук
 			end
-		end)
+		end
 	end)
 end
 
