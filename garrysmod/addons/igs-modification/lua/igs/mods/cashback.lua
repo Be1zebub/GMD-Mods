@@ -72,7 +72,9 @@ IGS("VIP на месяц", "vip_na_mesyac")
 :SetCategory("Группы")
 :SetDescription("С этой покупкой вы станете офигенными, потому что в ней воооот такая куча крутых возможностей")
 :SetCashback(0.3) -- 30%, накопленная сумма кэшбэка выдасться в следующем месяце
---:SetCashback(0.25, true) -- 25%, мгновенный кэшбэк
+-- :SetCashback(0.25, true) -- 25%, мгновенный кэшбэк
 
 -- пример включения глобального кэшбэка
 IGS.SetGlobalCashback(true, 0.15, false) -- включить, 15%, не мгновенный
+-- IGS.SetGlobalCashback(true, 0.2, true) -- включить, 20%, мгновенный
+-- IGS.SetGlobalCashback(false) -- отключить
