@@ -40,12 +40,12 @@ if SERVER then
 
 			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
 		elseif global then
-			local summ = math.floor(ITEM.price * global)
+			local summ = math.floor(item.price * global)
 			local total = bib.incr(ply, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		else
-			local summ = math.floor(ITEM.price * perc)
+			local summ = math.floor(item.price * perc)
 			local total = bib.incr(ply, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
