@@ -24,6 +24,30 @@ function IGS.SetGlobalCashback(enable, percent, instant)
 	end
 end
 
+local function getUID(ply, month)
+	if month == nil then
+		month = tonumber(os.date("%m"))
+	end
+
+	return "igs_cashback_".. month .."_".. ply:SteamID64()
+end
+
+function IGS.GetCashback(ply, month)
+	return bib.getNum(ply, getUID(ply, month))
+end
+
+function IGS.SetCashback(ply, month, summ)
+	return bib.setNum(getUID(ply, month), summ)
+end
+
+function IDS.AddCashback(ply, summ, month)
+	return bib.incr(ply, getUID(ply, month), summ)
+end
+
+function IDS.DeleteCashback(ply, month)
+	return bib.delete(getUID(ply, month))
+end
+
 if SERVER then
 	hook.Add("IGS.PlayerPurchasedItem", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/cashback.lua", function(ply, item)
 		local perc = item:GetMeta("cashback")
@@ -41,23 +65,23 @@ if SERVER then
 			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
 		elseif global then
 			local summ = math.floor(item.price * global)
-			local total = bib.incr(ply, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
+			local total = IDS.AddCashback(ply, summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		else
 			local summ = math.floor(item.price * perc)
-			local total = bib.incr(ply, "igs_cashback_".. tonumber(os.date("%m")) .."_".. ply:SteamID64(), summ)
+			local total = IDS.AddCashback(ply, summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		end
 	end)
 
 	hook.Add("IGS.PlayerPurchasesLoaded", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/cashback.lua", function(ply)
-		local uid = "igs_cashback_".. (tonumber(os.date("%m")) - 1) .."_".. ply:SteamID64()
-		local cashback = bib.getNum(ply, uid)
+		local month = tonumber(os.date("%m")) - 1
+		local cashback = IGS.GetCashback(ply, month)
 		if not cashback then return end
 
-		bib.delete(uid)
+		IGS.DeleteCashback(ply, month)
 		ply:AddIGSFunds(cashback, "Monthly Cashback")
 		IGS.Notify(ply, "Вы получили ".. PL_MONEY(cashback) .." кэшбэка за вашу поддержку в прошлом месяце, наслаждайтесь!")
 	end)
