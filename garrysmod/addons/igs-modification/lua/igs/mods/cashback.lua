@@ -27,7 +27,7 @@ end
 if SERVER then
 	hook.Add("IGS.PlayerPurchasedItem", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/cashback.lua", function(ply, item)
 		local perc = item:GetMeta("cashback")
-		if (perc or 0) <= 0 and global == nil then return end
+		if (perc or 0) <= 0 and (global or 0) <= 0 then return end
 
 		if item:GetMeta("cashback_instant") then
 			local cutoff = math.floor(item.price * perc)
