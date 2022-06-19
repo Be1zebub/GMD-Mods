@@ -40,11 +40,11 @@ function IGS.SetCashback(ply, month, summ)
 	return bib.setNum(getUID(ply, month), summ)
 end
 
-function IDS.AddCashback(ply, summ, month)
+function IGS.AddCashback(ply, summ, month)
 	return bib.incr(ply, getUID(ply, month), summ)
 end
 
-function IDS.DeleteCashback(ply, month)
+function IGS.DeleteCashback(ply, month)
 	return bib.delete(getUID(ply, month))
 end
 
@@ -65,12 +65,12 @@ if SERVER then
 			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
 		elseif global then
 			local summ = math.floor(item.price * global)
-			local total = IDS.AddCashback(ply, summ)
+			local total = IGS.AddCashback(ply, summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		else
 			local summ = math.floor(item.price * perc)
-			local total = IDS.AddCashback(ply, summ)
+			local total = IGS.AddCashback(ply, summ)
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		end
