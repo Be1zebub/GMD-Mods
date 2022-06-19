@@ -5,7 +5,7 @@
 local STORE_ITEM = FindMetaTable("IGSItem")
 
 function STORE_ITEM:Price()
-	local newPrice = hook.Run("IGS.ManipulateItemPrice", ply, self)
+	local newPrice = hook.Run("IGS.ManipulateItemPrice", ply, self) -- чёт тупанул, а где взять игрока на серверсайде то? да и как оказалось IGS по какой-то причине почти не использует метод ITEM:Price - хз тогда зачем он вообще нужон https://github.com/GM-DONATE/IGS/blob/ba94ec0f224cc27126391185335b5af32af46cd4/addons/igs-core/lua/igs/network/net_sv.lua#L62
 	if newPrice then
 		return newPrice
 	end
