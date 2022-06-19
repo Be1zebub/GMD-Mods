@@ -2,19 +2,33 @@
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/price_manipulator.lua
 -- источник: https://forum.gm-donate.net/t/kak-sdelat-skidku-na-moder-esli-u-igroka-vip/1441/8
 
-local STORE_ITEM = FindMetaTable("IGSItem")
-
-function STORE_ITEM:Price()
-	local newPrice = hook.Run("IGS.ManipulateItemPrice", ply, self) -- чёт тупанул, а где взять игрока на серверсайде то? да и как оказалось IGS по какой-то причине почти не использует метод ITEM:Price - хз тогда зачем он вообще нужон https://github.com/GM-DONATE/IGS/blob/ba94ec0f224cc27126391185335b5af32af46cd4/addons/igs-core/lua/igs/network/net_sv.lua#L62
+if SERVER then -- патчит серверсайд код который обрабатывает покупку предмета (без патча ни как, this is the only way)
+	local patch = file.Read("igs/network/net_sv.lua", "LUA")
+	patch = patch:sub(1, (patch:find("local function IGS_Activate", 1, true))):gsub("local curr_price = ITEM:PriceInCurrency()", [[
+	local curr_price = ITEM:PriceInCurrency()
+	local newPrice = hook.Run("IGS.ManipulateItemPrice", pl, ITEM)
 	if newPrice then
-		return newPrice
+		curr_price = newPrice
 	end
+	]])
+	RunString(patch, "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/price_manipulator.lua")
+else -- патчит метод IGSItem:Price() для отображения цены со скидкой в донат-меню
+	local IGSItem = FindMetaTable("IGSItem")
 
-	return self.price
+	function IGSItem:Price()
+		local newPrice = hook.Run("IGS.ManipulateItemPrice", LocalPlayer(), self)
+		if newPrice then
+			return newPrice
+		end
+
+		return self.price
+	end
 end
 
--- пример использования:
--- делает скидку на покупку модера если куплен вип и тд
+-- примеры использования:
+
+
+-- 1. делает скидку на покупку модера если куплен вип и тд
 
 local sales = {
 	moder = "vip", -- если куплен вип, даётся скидка на покупку модера (цена випки)
@@ -40,5 +54,14 @@ hook.Add("IGS.ManipulateItemPrice", "https://forum.gm-donate.net/t/kak-sdelat-sk
 		elseif ply:HasPurchase(sales[item.uid]) then
 			return item.price - IGS.GetItem(sales[item.uid]):Price()
 		end
+	end
+end)
+
+-- 2. Скидка на первую покупку (для игроков ещё ни разу не покупавших донат действует скидка на все предметы) https://s3.forum.gm-donate.net/original/2X/d/dc02ed1ab774eac9bd11ea77560953919063de58.jpeg
+local firstPurchaseSale = 0.8
+
+hook.Add("IGS.ManipulateItemPrice", "https://forum.gm-donate.net/t/kak-sdelat-skidku-na-moder-esli-u-igroka-vip/1441/11", function(ply, item)
+	if table.Count(IGS.PlayerPurchases(ply)) == 0 then
+		return item.price * (1 - firstPurchaseSale)
 	end
 end)
