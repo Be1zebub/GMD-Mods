@@ -5,7 +5,7 @@
 local STORE_ITEM = FindMetaTable("IGSItem")
 
 function STORE_ITEM:Price()
-	local newPrice = hook.Run("IGS.ManipulateItemPrice", ply, item)
+	local newPrice = hook.Run("IGS.ManipulateItemPrice", ply, self)
 	if newPrice then
 		return newPrice
 	end
