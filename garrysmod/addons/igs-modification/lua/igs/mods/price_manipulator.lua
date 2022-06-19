@@ -5,7 +5,7 @@
 local IGSItem = FindMetaTable("IGSItem")
 
 local price = {price = true}
-function IGSItem:_index(key)
+function IGSItem:__index(key)
 	if price[key] then
 		return self:Price()
 	else
