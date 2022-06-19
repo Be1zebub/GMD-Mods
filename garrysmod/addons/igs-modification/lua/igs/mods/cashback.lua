@@ -33,7 +33,7 @@ local function getUID(ply, month)
 end
 
 function IGS.GetCashback(ply, month)
-	return bib.getNum(ply, getUID(ply, month))
+	return bib.getNum(getUID(ply, month))
 end
 
 function IGS.SetCashback(ply, month, summ)
@@ -41,7 +41,7 @@ function IGS.SetCashback(ply, month, summ)
 end
 
 function IGS.AddCashback(ply, summ, month)
-	return bib.increment(ply, getUID(ply, month), summ)
+	return bib.increment(getUID(ply, month), summ)
 end
 
 function IGS.DeleteCashback(ply, month)
