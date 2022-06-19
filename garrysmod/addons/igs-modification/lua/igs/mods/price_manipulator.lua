@@ -2,6 +2,26 @@
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/price_manipulator.lua
 -- источник: https://forum.gm-donate.net/t/kak-sdelat-skidku-na-moder-esli-u-igroka-vip/1441/8
 
+local IGSItem = FindMetaTable("IGSItem")
+
+local price = {price = true}
+function IGSItem:_index(key)
+	if price[key] then
+		return self:Price()
+	else
+		return rawget(self, key)
+	end
+end
+
+function IGSItem:Price()
+	local newPrice = hook.Run("IGS.ManipulateItemPrice", LocalPlayer(), self)
+	if newPrice then
+		return newPrice
+	end
+
+	return self.price
+end
+
 if SERVER then -- патчит серверсайд код который обрабатывает покупку предмета (без патча ни как, this is the only way)
 	local patch = file.Read("igs/network/net_sv.lua", "LUA")
 	patch = patch:sub(1, (patch:find("local function IGS_Activate", 1, true))):gsub("local curr_price = ITEM:PriceInCurrency()", [[
@@ -11,18 +31,7 @@ if SERVER then -- патчит серверсайд код который обр
 		curr_price = newPrice
 	end
 	]])
-	RunString(patch, "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/price_manipulator.lua")
-else -- патчит метод IGSItem:Price() для отображения цены со скидкой в донат-меню
-	local IGSItem = FindMetaTable("IGSItem")
-
-	function IGSItem:Price()
-		local newPrice = hook.Run("IGS.ManipulateItemPrice", LocalPlayer(), self)
-		if newPrice then
-			return newPrice
-		end
-
-		return self.price
-	end
+	RunString(patch, "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/price_manipulator.lua")	
 end
 
 -- примеры использования:
