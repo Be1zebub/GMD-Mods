@@ -1,5 +1,10 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/autorun/igs-mods-loader.lua
+-- загрузчик модов
+
+local Disabled = { -- для отключения модов
+	--["outfitter"] = true -- пример отключения https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/outfitter.lua
+}
 
 local realms = {
 	sv_ = SERVER and include or function() end,
@@ -7,6 +12,8 @@ local realms = {
 }
 
 local function LoadFile(path, filename)
+	if Disabled[filename:match("(.+)%..+")] then return end
+
 	local worker = realms[filename:sub(1, 3)]
 
 	if worker then
