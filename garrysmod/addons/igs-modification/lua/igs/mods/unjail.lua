@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/unjail.lua
--- источник: https://forum.gm-donate.ru/t/item-dlya-platnogo-unjail-vyjti-iz-dzhajla/899/2
+-- источник: https://forum.gm-donate.net/t/item-dlya-platnogo-unjail-vyjti-iz-dzhajla/899/2
 
 IGS("Побег из jail", "unjail")
 :SetPrice(100)

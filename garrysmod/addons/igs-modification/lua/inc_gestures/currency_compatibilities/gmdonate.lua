@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with love <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/inc_gestures/currency_compatibilities/gmdonate.lua
--- интеграция валюты https://gm-donate.ru/ в аддон https://www.gmodstore.com/market/view/gestures
+-- интеграция валюты https://gm-donate.net/ в аддон https://www.gmodstore.com/market/view/gestures
 
 function INC_GESTURES:TakeMoney(ply, num)
 	ply:AddIGSFunds(-num, "Buying a gesture gmod.store/market/view/gestures")

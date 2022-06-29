@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/salary.lua
--- источник: https://forum.gm-donate.ru/t/kak-sdelat-uvelichenie-zarplaty/1218/7
+-- источник: https://forum.gm-donate.net/t/kak-sdelat-uvelichenie-zarplaty/1218/7
 
 -- создание предмета
 IGS("Дополнительная зарплата", "added_salary")

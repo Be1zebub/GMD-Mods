@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/cashback.lua
--- источник: https://forum.gm-donate.ru/t/keshbek/963
+-- источник: https://forum.gm-donate.net/t/keshbek/963
 -- спасибо @amd_nick за вклад
 
 -- мгновенный кэш-бэк выдаётся сразу после покупки

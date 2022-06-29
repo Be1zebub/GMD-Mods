@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/sv_bonus_on_1st_purchase.lua
--- источник: https://forum.gm-donate.ru/t/vydacha-privilegii-za-pokupku-lyubogo-tovara/961/2
+-- источник: https://forum.gm-donate.net/t/vydacha-privilegii-za-pokupku-lyubogo-tovara/961/2
 
 local item_uid = "vip4all" -- уникальный интендификатор предмета
 --[[ Пример:

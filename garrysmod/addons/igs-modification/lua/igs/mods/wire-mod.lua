@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/wire-mod.lua
--- источники: https://forum.gm-donate.ru/t/kak-sdelat-prodazhu-dostupa-k-wire/1225/2 https://forum.gm-donate.ru/t/kak-dobavit-v-prodazhu-e2p/856/4
+-- источники: https://forum.gm-donate.net/t/kak-sdelat-prodazhu-dostupa-k-wire/1225/2 https://forum.gm-donate.net/t/kak-dobavit-v-prodazhu-e2p/856/4
 
 -- продажа доступа к инструментам wiremod (гейты, сенсоры и тд)
 IGS("Доступ к Wire-mod", "igs_wiremod")
