@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/donate_models.lua
--- источник: https://forum.gm-donate.ru/t/prodazha-donat-modelej/1003/6
+-- источник: https://forum.gm-donate.net/t/prodazha-donat-modelej/1003/6
 
 local ITEM = FindMetaTable("IGSItem")
 
@@ -34,7 +34,7 @@ if SERVER then
 end
 
 IGS("Gorgeous Freeman", "custom_model")
-:SetDescription("https://forum.gm-donate.ru/t/sozdanie-privyazki-modeli-na-vse-profesii-darkrp/1003/5")
+:SetDescription("https://forum.gm-donate.net/t/sozdanie-privyazki-modeli-na-vse-profesii-darkrp/1003/5")
 :SetCategory("Разное")
 :SetPrice(300)
 :SetPerma()

@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/movespeed.lua
--- источник: https://forum.gm-donate.ru/t/donat-na-skorost/984/2
+-- источник: https://forum.gm-donate.net/t/donat-na-skorost/984/2
 
 IGS("+50 к скорости бега", "movespeed")
 :SetDescription("Добавляет +50 к скорости бега. При покупке 2 штук, будет +100, 3 шт = +150")

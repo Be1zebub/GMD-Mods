@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/outfitter.lua
--- источник: https://forum.gm-donate.ru/t/kak-zapretit-ispolzovat-outfitter-igrokam/1265
+-- источник: https://forum.gm-donate.net/t/kak-zapretit-ispolzovat-outfitter-igrokam/1265
 
 hook.Add("CanOutfit", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/outfitter.lua", function(ply)
 	if not ply:HasPurchase("outfitter") then

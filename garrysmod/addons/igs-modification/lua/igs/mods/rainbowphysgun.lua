@@ -1,6 +1,6 @@
 -- from incredible-gmod.ru with <3
 -- https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/rainbowphysgun.lua
--- источник: https://forum.gm-donate.ru/t/raznoczvetnyj-fizgan-v-donat-menyu/34/5
+-- источник: https://forum.gm-donate.net/t/raznoczvetnyj-fizgan-v-donat-menyu/34/5
 
 IGS("Разноцветный физган", "rainbowphysgun")
 :SetPrice(150)
