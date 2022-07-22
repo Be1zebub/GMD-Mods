@@ -6,7 +6,7 @@ CHALLENGE:SetName("Покупайте донат")
 CHALLENGE:SetDesc("")
 CHALLENGE:SetProgressDesc("Купите ещё :goal донат-услуг")
 CHALLENGE:SetFinishedDesc("Купленно :goal донат-услуг")
-CHALLENGE:SetID("gestures_use")
+CHALLENGE:SetID("igs_purchases")
 CHALLENGE:AddHook("IGS.PlayerPurchasedItem", function(self, ply, _ply)
 	if IsValid(ply) and IsValid(_ply) and ply == _ply then
 		self:AddProgress(1)
