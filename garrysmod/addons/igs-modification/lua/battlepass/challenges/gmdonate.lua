@@ -3,6 +3,7 @@
 
 local CHALLENGE = BATTLEPASS:CreateTemplateChallenge()
 CHALLENGE:SetName("Покупайте донат")
+CHALLENGE:SetIcon("battlepass/challenges/salary.png")
 CHALLENGE:SetDesc("")
 CHALLENGE:SetProgressDesc("Купите ещё :goal донат-услуг")
 CHALLENGE:SetFinishedDesc("Купленно :goal донат-услуг")
