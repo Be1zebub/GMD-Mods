@@ -50,27 +50,23 @@ end
 
 if SERVER then
 	hook.Add("IGS.PlayerPurchasedItem", "https://github.com/Be1zebub/GMD-Mods/blob/master/garrysmod/addons/igs-modification/lua/mods/cashback.lua", function(ply, item)
-		local perc = item:GetMeta("cashback")
-		if (perc or 0) <= 0 and (global or 0) <= 0 then return end
+		local perc = item:GetMeta("cashback") or 0
+		local instant = item:GetMeta("cashback_instant")
 
-		if item:GetMeta("cashback_instant") then
+		if global and global > prec then
+			prec = global
+			instant = global_instant
+		end
+
+		if prec == 0 then return end
+
+		if instant then
 			local cutoff = math.floor(item.price * perc)
-			ply:AddIGSFunds(cutoff, "Cashback ".. cutoff .." - ".. (perc * 100) .."%")
 
+			ply:AddIGSFunds(cutoff, "Cashback ".. cutoff .." - ".. math.floor(perc * 100) .."%")
 			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
-		elseif global_instant then
-			local cutoff = math.floor(item.price * global)
-			ply:AddIGSFunds(cutoff, "Cashback ".. cutoff .." - ".. (global * 100) .."%")
-
-			IGS.Notify(ply, "Спасибо за покупку! Вы получили +".. PL_MONEY(cutoff) .." кэшбэка!")
-		elseif global then
-			local summ = math.floor(item.price * global)
-			local total = IGS.AddCashback(ply, summ)
-
-			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		else
-			local summ = math.floor(item.price * perc)
-			local total = IGS.AddCashback(ply, summ)
+			local total = IGS.AddCashback(ply, math.floor(item.price * perc))
 
 			IGS.Notify(ply, "Спасибо за покупку! В следующем месяце вы получите +".. PL_MONEY(total) .." кэшбэка!")
 		end
@@ -88,7 +84,6 @@ if SERVER then
 end
 
 -- пример создания предмета с кэшбэком
-
 IGS("VIP на месяц", "vip_na_mesyac")
 :SetULXGroup("vip")
 :SetPrice(150)
