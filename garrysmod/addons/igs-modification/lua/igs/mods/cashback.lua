@@ -53,8 +53,8 @@ if SERVER then
 		local perc = item:GetMeta("cashback") or 0
 		local instant = item:GetMeta("cashback_instant")
 
-		if global and global > prec then
-			prec = global
+		if global and global > perc then
+			perc = global
 			instant = global_instant
 		end
 
